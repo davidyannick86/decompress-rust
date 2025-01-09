@@ -1,0 +1,23 @@
+# Ignore the target directory
+/target/
+
+# Ignore the Cargo.lock file if you're building a library
+# Cargo.lock
+
+# Ignore the node_modules directory if you're using Node.js
+/node_modules/
+
+# Ignore the .vscode directory
+.vscode/
+
+# Ignore the .DS_Store file (macOS)
+.DS_Store
+
+# Ignore the Thumbs.db file (Windows)
+Thumbs.db
+
+# Ignore the debug log file
+debug.log
+
+# Book
+book*
