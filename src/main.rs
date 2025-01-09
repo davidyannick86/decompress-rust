@@ -20,12 +20,14 @@ fn real_main() -> Result<i32, Box<dyn std::error::Error>> {
     // Create a new ZipArchive from the file
     let archive = zip::ZipArchive::new(file)?;
 
-    fun_name(archive)?;
+    process_archive(archive)?;
 
     return Ok(0);
 }
 
-fn fun_name(mut archive: zip::ZipArchive<fs::File>) -> Result<(), Box<dyn std::error::Error>> {
+fn process_archive(
+    mut archive: zip::ZipArchive<fs::File>,
+) -> Result<(), Box<dyn std::error::Error>> {
     // Iterate over the files in the archive
     for i in 0..archive.len() {
         // Get the file at index i
