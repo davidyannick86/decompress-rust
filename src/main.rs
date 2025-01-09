@@ -18,8 +18,14 @@ fn real_main() -> i32 {
     let file = fs::File::open(&file_name).unwrap();
 
     // Create a new ZipArchive from the file
-    let mut archive = zip::ZipArchive::new(file).unwrap();
+    let archive = zip::ZipArchive::new(file).unwrap();
 
+    fun_name(archive);
+
+    return 0;
+}
+
+fn fun_name(mut archive: zip::ZipArchive<fs::File>) {
     // Iterate over the files in the archive
     for i in 0..archive.len() {
         // Get the file at index i
@@ -73,8 +79,6 @@ fn real_main() -> i32 {
             }
         }
     }
-
-    return 0;
 }
 
 fn main() {
