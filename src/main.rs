@@ -1,6 +1,5 @@
 use std::fs;
 use std::io;
-use std::process::Output;
 
 fn real_main() -> i32 {
     let args: Vec<String> = std::env::args().collect();
@@ -45,6 +44,13 @@ fn real_main() -> i32 {
             }
             let mut outfile = fs::File::create(&output).unwrap();
             io::copy(&mut file, &mut outfile).unwrap();
+        }
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            if let Some(mode) = file.unix_mode() {
+                fs::set_permissions(&output, fs::Permissions::from_mode(mode)).unwrap();
+            }
         }
     }
 

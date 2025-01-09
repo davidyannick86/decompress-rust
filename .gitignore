@@ -21,3 +21,6 @@ debug.log
 
 # Book
 book*
+
+# .zip
+*.zip
