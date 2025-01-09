@@ -1,5 +1,6 @@
 use std::fs;
 use std::io;
+use std::process::Output;
 
 fn real_main() -> i32 {
     let args: Vec<String> = std::env::args().collect();
@@ -26,6 +27,24 @@ fn real_main() -> i32 {
             if !comment.is_empty() {
                 println!("File {} has comment: {}", i, comment);
             }
+        }
+        if (*file.name()).ends_with('/') {
+            println!("File {} extracted to \"{}\"", i, output.display());
+            fs::create_dir_all(&output).unwrap();
+        } else {
+            println!(
+                "File {} extracted to \"{}\" ({} bytes)",
+                i,
+                output.display(),
+                file.size()
+            );
+            if let Some(p) = output.parent() {
+                if !p.exists() {
+                    fs::create_dir_all(&p).unwrap();
+                }
+            }
+            let mut outfile = fs::File::create(&output).unwrap();
+            io::copy(&mut file, &mut outfile).unwrap();
         }
     }
 
